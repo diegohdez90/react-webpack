@@ -3,9 +3,10 @@ import List from './components/List';
 
 
 const App: React.FC = () => {
-	return (<div className='container'>Hello React Application
+	return (<React.Fragment>
+		<h2>Hello React Application</h2>
 		<List />
-	</div>);
+	</React.Fragment>);
 };
 
 export default App;
