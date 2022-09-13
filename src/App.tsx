@@ -2,9 +2,10 @@ import React from 'react';
 import List from './components/List';
 import Logo from './assets/img/logo.svg';
 import Cart from './components/Cart';
+import AppProvider from './context/AppContext';
 
 const App: React.FC = () => {
-	return (<React.Fragment>
+	return (<AppProvider>
 		<div className="text-center">
 			<picture>
 				<Logo />
@@ -17,7 +18,7 @@ const App: React.FC = () => {
 			</div>
 		</div>
 		<List />
-	</React.Fragment>);
+	</AppProvider>);
 };
 
 export default App;
