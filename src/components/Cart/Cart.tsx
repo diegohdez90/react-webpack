@@ -20,7 +20,7 @@ class Cart extends React.Component<Props> {
 						overlay={<Popover>
 							<Popover.Body>
 								<ul>
-									{state.cart.items.map((pizza, index) => (<li key={`${index}-${pizza.pizzaId}`}>${pizza.name} {pizza.quantity > 1 ? (<React.Fragment><Plus /> {pizza.quantity}</React.Fragment>) : null}</li>))}
+									{state.cart.items.map((pizza, index) => (<li key={`${index}-${pizza.id}`}>{pizza.name} {pizza.quantity > 1 ? (<React.Fragment><Plus /> {pizza.quantity}</React.Fragment>) : null}</li>))}
 								</ul>
 							</Popover.Body>
 						</Popover>}

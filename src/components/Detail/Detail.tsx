@@ -17,7 +17,11 @@ const Detail: React.FC<Props> = ({
 		dispatch({
 			type: ADD_TO_CART,
 			payload: {
-				item: pizza
+				item: {
+					id: pizza.id,
+					name: pizza.name,
+					price: +pizza.price
+				}
 			}
 		});
 	}
