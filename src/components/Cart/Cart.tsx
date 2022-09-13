@@ -1,21 +1,26 @@
-import React from "react";
+import React from 'react';
+import { Popover } from 'react-bootstrap';
 import { Cart as CartIcon } from 'react-bootstrap-icons';
+import OverlayTrigger from 'react-bootstrap/esm/OverlayTrigger';
+import Tooltip from 'react-bootstrap/esm/Tooltip';
 
 interface Props {}
 
-interface State {
-	isOpen: boolean
-}
-
-class Cart extends React.Component<Props, State> {
-	state = {
-		isOpen: false
-	}
+class Cart extends React.Component<Props> {
 
 	render() {
-		return (<button type="button" className="btn btn-link text-decoration-none" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
-			<CartIcon />Cart
-		</button>);
+		return (
+			<OverlayTrigger
+				placement='bottom'
+				overlay={<Popover>
+					<Popover.Body>
+						2 pizzas
+					</Popover.Body>
+				</Popover>}
+			>
+				<button className="btn btn-link text-decoration-none"><CartIcon />Cart</button>
+			</OverlayTrigger>
+		);
 	}
 }
 
