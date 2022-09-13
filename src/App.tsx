@@ -3,6 +3,9 @@ import List from './components/List';
 import Logo from './assets/img/logo.svg';
 import Cart from './components/Cart';
 import AppProvider from './context/AppContext';
+import SpecialOffer from './components/SpecialOffer';
+
+import pizzas from './data/pizzas.json';
 
 const App: React.FC = () => {
 	return (<AppProvider>
@@ -17,7 +20,8 @@ const App: React.FC = () => {
 				<Cart />
 			</div>
 		</div>
-		<List />
+		<SpecialOffer pizza={pizzas[1]} />
+		<List pizzas={pizzas} />
 	</AppProvider>);
 };
 
