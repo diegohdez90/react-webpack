@@ -1,7 +1,7 @@
 import React, { SetStateAction, useContext } from 'react';
 import { Pizza } from "../../interfaces/Pizza";
-import { AppSetContext, useSetState } from '../../context/AppContext';
-import { AppContextValue } from '../../interfaces/AppContextValue';
+import { useStateDispatch } from '../../context/AppContext';
+import { ADD_TO_CART } from '../../utils/constants';
 
 interface Props {
 	pizza: Pizza
@@ -12,31 +12,13 @@ const Detail: React.FC<Props> = ({
 }: Props) => {
 
 
-	const setState = useSetState()
+	const dispatch = useStateDispatch()
 	const addToCart = () => {
-		setState(state => {
-			const index = state.cart.items.findIndex(item => item.pizzaId === pizza.id);
-			return {
-				...state,
-				cart: {
-					...state.cart,
-					items: index > -1 ? state.cart.items.map(item => {
-						if (item.pizzaId === pizza.id) {
-							return {
-								...item,
-								quantity: item.quantity + 1
-							}
-						}
-						return item;
-					}) : [
-						...state.cart.items, {
-						pizzaId: pizza.id,
-						name: pizza.name,
-						price: +pizza.price,
-						quantity: 1
-					}]
-				}
-			};
+		dispatch({
+			type: ADD_TO_CART,
+			payload: {
+				item: pizza
+			}
 		});
 	}
 

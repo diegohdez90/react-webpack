@@ -1,5 +1,7 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useReducer } from 'react';
+import { AddToCartAction } from '../interfaces/AddToCartAction';
 import { AppContextValue } from '../interfaces/AppContextValue';
+import reducer from '../reducer';
 
 interface Props {
 	children: React.ReactNode
@@ -13,22 +15,22 @@ const defaultAppValue: AppContextValue = {
 
 export const AppContext = createContext(defaultAppValue);
 
-export const AppSetContext = createContext<React.Dispatch<React.SetStateAction<AppContextValue>> | null>(null);
+export const AppDispatchContext = createContext<React.Dispatch<AddToCartAction> | null>(null);
 
-export const useSetState = () => {
-	const setState = useContext(AppSetContext);
-	if (!setState) {
-		throw new Error('setter error');
+export const useStateDispatch = () => {
+	const dispatch = useContext(AppDispatchContext);
+	if (!dispatch) {
+		throw new Error('dispatch error');
 	}
-	return setState;
+	return dispatch;
 }
 
 const AppProvider: React.FC<Props> = ({ children }: Props) => {
-	const [state, setState] = useState(defaultAppValue);
+	const [state, dispatch] = useReducer(reducer, defaultAppValue);
 	return <AppContext.Provider value={state}>
-		<AppSetContext.Provider value={setState}>
+		<AppDispatchContext.Provider value={dispatch}>
 			{children}
-		</AppSetContext.Provider>
+		</AppDispatchContext.Provider>
 	</AppContext.Provider>
 }
 

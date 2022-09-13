@@ -19,7 +19,7 @@ class Cart extends React.Component<Props> {
 							state.cart.items.length > 0 ? `${state.cart.items.length} pizza${state.cart.items.length > 1 ? 's': ''}` : 'No pizza selected'
 						}
 							<ul>
-								{state.cart.items.map((pizza, index) => (<li key={`${index}-${pizza.pizzaId}`}>${pizza.name} {pizza.quantity > 1 ? (<React.Fragment><Plus /> ${pizza.quantity}</React.Fragment>) : null}</li>))}
+								{state.cart.items.map((pizza, index) => (<li key={`${index}-${pizza.pizzaId}`}>${pizza.name} {pizza.quantity > 1 ? (<React.Fragment><Plus /> {pizza.quantity}</React.Fragment>) : null}</li>))}
 							</ul>
 						</Popover.Body>
 					</Popover>}

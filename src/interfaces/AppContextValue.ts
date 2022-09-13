@@ -1,10 +1,7 @@
+import { CartItem } from "./CartItem"
+
 export interface AppContextValue {
 	cart: {
-		items: {
-			pizzaId: number,
-			name: string;
-			price: number,
-			quantity: number,
-		}[]
+		items: Array<CartItem>
 	}
 }
