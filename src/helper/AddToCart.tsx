@@ -9,7 +9,7 @@ export interface Props {
 
 export function withAddToCart<OriginalProps extends Props>(ChildComponent: React.ComponentType<OriginalProps>) {
 	const AddToCartHOC = (props: Omit<OriginalProps, keyof Props>) => {
-		const dispatch = useStateDispatch()
+		const dispatch = useStateDispatch();
 
 		const addToCart: Props['addToCart'] = (pizza: Pizza) => {
 			dispatch({
@@ -27,4 +27,27 @@ export function withAddToCart<OriginalProps extends Props>(ChildComponent: React
 	}
 
 	return AddToCartHOC;
+}
+
+export interface WithAddToCartProps {
+	children: (props: Props) => JSX.Element;
+}
+
+export const WithAddToCartProps: React.FC<WithAddToCartProps> = ({ children }) => {
+	const dispatch = useStateDispatch();
+
+	const addToCart: Props['addToCart'] = (pizza: Pizza) => {
+		dispatch({
+			type: ADD_TO_CART,
+			payload: {
+				item: {
+					id: pizza.id,
+					name: pizza.name,
+					price: +pizza.price
+				}
+			}
+		});
+	}
+
+	return children({ addToCart });
 }
