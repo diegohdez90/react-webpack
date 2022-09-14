@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { Popover } from 'react-bootstrap';
 import { Cart as CartIcon, Plus } from 'react-bootstrap-icons';
 import OverlayTrigger from 'react-bootstrap/esm/OverlayTrigger';
@@ -10,6 +10,8 @@ interface Props {}
 
 class Cart extends React.Component<Props> {
 
+	#containerRef: React.RefObject<HTMLButtonElement> = createRef();;
+	containerRef = createRef();
 	render() {
 		return (
 			<AppContext.Consumer>{
@@ -25,7 +27,9 @@ class Cart extends React.Component<Props> {
 							</Popover.Body>
 						</Popover>}
 					>
-						<button className="btn btn-link text-decoration-none"><CartIcon />{
+						<button
+							ref={this.#containerRef}
+							className="btn btn-link text-decoration-none"><CartIcon />{
 								total > 0 ? `${total} pizza${total > 1 ? 's': ''}` : 'No pizza selected'
 							}</button>
 					</OverlayTrigger>)
