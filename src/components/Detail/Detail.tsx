@@ -1,15 +1,16 @@
 import React, { SetStateAction, useContext } from 'react';
 import { Pizza } from "../../interfaces/Pizza";
-import { Props as  AddToCartProps, withAddToCart } from '../../helper/AddToCart';
+import { Props as  AddToCartProps, useAddToCart, withAddToCart } from '../../helper/AddToCart';
 
-interface Props extends AddToCartProps {
+interface Props {
 	pizza: Pizza
 }
 
 const Detail: React.FC<Props> = ({
 	pizza,
-	addToCart
 }: Props) => {
+
+	const addToCart = useAddToCart();
 
 	return (<div className='card py-3 p-4'>
 		<img src={pizza.assets.menu[0].url} alt="pizza-image" />
@@ -27,4 +28,4 @@ const Detail: React.FC<Props> = ({
 	</div>)
 };
 
-export default withAddToCart(Detail);
+export default Detail;
