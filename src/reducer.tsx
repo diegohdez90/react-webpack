@@ -32,7 +32,7 @@ const reducer = (state: AppContextValue, action: AddToCartAction | InitializeCar
 		case INITIALIZE_CART:
 			return {
 				...state,
-				cart: action.payload
+				cart: action.payload.cart
 			}
 		default:
 			return state;

@@ -16,7 +16,9 @@ const defaultAppValue: AppContextValue = {
 
 export const AppContext = createContext(defaultAppValue);
 
-export const AppDispatchContext = createContext<React.Dispatch<AddToCartAction> | undefined>(undefined);
+export const AppDispatchContext = createContext<
+	React.Dispatch<AddToCartAction> | undefined
+>(undefined);
 
 export const useStateDispatch = () => {
 	const dispatch = useContext(AppDispatchContext);
@@ -35,7 +37,9 @@ const AppProvider: React.FC<Props> = ({ children }: Props) => {
 			const data = JSON.parse(cart);
 			dispatch({
 				type: INITIALIZE_CART,
-				payload: data
+				payload: {
+					cart: data
+				}
 			});
 		}
 	}, []);

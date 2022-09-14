@@ -7,7 +7,7 @@ export interface Props {
 	addToCart: (pizza: Pizza) => void;
 }
 
-export function withAddToCart<OriginalProps>(ChildComponent: React.ComponentType<OriginalProps>) {
+export function withAddToCart<OriginalProps extends Props>(ChildComponent: React.ComponentType<OriginalProps>) {
 	const AddToCartHOC = (props: Omit<OriginalProps, keyof Props>) => {
 		const dispatch = useStateDispatch()
 
