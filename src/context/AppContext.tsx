@@ -16,7 +16,7 @@ const defaultAppValue: AppContextValue = {
 
 export const AppContext = createContext(defaultAppValue);
 
-export const AppDispatchContext = createContext<React.Dispatch<AddToCartAction> | null>(null);
+export const AppDispatchContext = createContext<React.Dispatch<AddToCartAction> | undefined>(undefined);
 
 export const useStateDispatch = () => {
 	const dispatch = useContext(AppDispatchContext);

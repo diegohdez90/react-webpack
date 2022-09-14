@@ -1,27 +1,13 @@
 import React from 'react';
-import { useStateDispatch } from '../../context/AppContext';
+import { withAddToCart } from '../../helper/AddToCart';
 import { Pizza } from '../../interfaces/Pizza';
-import { ADD_TO_CART } from '../../utils/constants';
+import { Props as AddToCartProps} from '../../helper/AddToCart';
 
-interface Props {
+interface Props extends AddToCartProps {
 	pizza: Pizza;
 }
 
-const SpecialOffer: React.FC<Props> = ({pizza} : Props) => {
-	const dispatch = useStateDispatch()
-
-	const addToCart = () => {
-		dispatch({
-			type: ADD_TO_CART,
-			payload: {
-				item: {
-					id: pizza.id,
-					name: pizza.name,
-					price: +pizza.price
-				}
-			}
-		});
-	}
+const SpecialOffer: React.FC<Props> = ({pizza, addToCart} : Props) => {
 
 	return (
 		<div className="row gy-3 g-4 my-4">
@@ -33,8 +19,8 @@ const SpecialOffer: React.FC<Props> = ({pizza} : Props) => {
 						<p className="card-text">{pizza.menu_description}</p>
 						<h6 className="card-title pricing-card-title h4 text-center">${pizza.price}</h6>
 						<button
-							onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-								addToCart();
+							onClick={(_: React.MouseEvent<HTMLButtonElement>) => {
+								addToCart(pizza);
 							}}
 							className='btn btn-primary'
 						>Add to cart</button>
@@ -45,4 +31,4 @@ const SpecialOffer: React.FC<Props> = ({pizza} : Props) => {
 	);
 }
 
-export default SpecialOffer;
+export default withAddToCart(SpecialOffer);
